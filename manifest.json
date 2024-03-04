@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Jisho Button",
+  "name": "Quixotic",
   "version": "1.0",
-  "description": "Adds a button to jisho.org.",
+  "description": "Jisho to Anki flashcard generator.",
   "permissions": ["*://jisho.org/*"],
   "background": {
     "service_worker": "background.js"
