@@ -37,7 +37,7 @@ function convert(kanji, furigana) {
 
 chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
     if (message.action === 'makeAFlashcard') {
-        console.log('making a flashcard')
+        console.log('making a flashcard');
 
         const kanji = message.args.kanji;
         const furigana = message.args.furigana;

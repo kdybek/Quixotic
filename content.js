@@ -15,7 +15,6 @@ for (let element of elements) {
         console.log(furigana);
 
         chrome.runtime.sendMessage({ action: 'makeAFlashcard', args: { kanji, furigana } });
-        console.log('dupa');
     });
 
     element.appendChild(button);
