@@ -1,31 +1,25 @@
-function enterJMDict() {
-
+function findJMdictLink(result) {
+    const links = result.querySelectorAll('a');
+    return Array.from(links).filter(link => link.textContent.includes('Edit in JMdict'))[0].href;
 }
 
-//---------------------------------------------------------
-//-------------------------Main----------------------------
-//---------------------------------------------------------
-
 // Find all results on page
-const elements = document.querySelectorAll('div.concept_light clearfix');
+const primaryDiv = document.getElementById('primary');
+const results = primaryDiv.querySelectorAll('div.concept_light.clearfix');
+console.log(results);
 
 // Add flashcard buttons
-for (let element of elements) {
+for (let result of results) {
     const button = document.createElement("button");
     button.textContent = "Make a flashcard";
 
     button.addEventListener('click', function() {
-        const kanji = element.querySelector('.text').textContent;
-        console.log(kanji);
-
-        const furigana_raw = element.querySelectorAll('[class$="-up kanji"]');
-        const furigana = Array.from(furigana_raw).map(function(f) {
-            return f.textContent;
+        console.log(findJMdictLink(result));
+        chrome.runtime.sendMessage({
+            action: 'addNote',
+            JMdictLink: findJMdictLink(result)
         });
-        console.log(furigana);
-
-        chrome.runtime.sendMessage({ action: 'addNote', args: { kanji, furigana } });
     });
 
-    element.appendChild(button);
+    result.querySelector('div.concept_light-representation').appendChild(button);
 }

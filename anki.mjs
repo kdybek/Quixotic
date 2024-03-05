@@ -37,42 +37,20 @@ function ankiCheckResponse(response) {
     }
 }
 
-function ankiAddNote(deck, model, front, back) {
-    return ankiInvoke('addNote', 6,
-        { note: {
-            deckName: deck,
-            modelName: model,
-            fields: {
-                Front: front,
-                Back: back
-            },
-            tag: 'quixotic'
-        }
+export function addNote(deck, model, front, back) {
+    let response = ankiInvoke(
+        'addNote', 6, {
+            note: {
+                deckName: deck,
+                modelName: model,
+                fields: {
+                    Front: front,
+                    Back: back
+                },
+                tag: 'quixotic'
+            }
         })
+
+    ankiCheckResponse(response);
+    return response;
 }
-
-function convert(kanji, furigana) {
-    let str = '';
-
-    for (let f of furigana) {
-        str += f;
-    }
-
-    return str;
-}
-
-chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
-    if (message.action === 'addNote') {
-        console.log('making a flashcard');
-
-        const kanji = message.args.kanji;
-        const furigana = message.args.furigana;
-
-        ankiAddNote('test', 'Basic', kanji, convert(kanji, furigana))
-            .then(response => {
-                ankiCheckResponse(response);
-                console.log(response);
-            })
-            .catch(error => console.error('An error occurred:', error));
-    }
-});
