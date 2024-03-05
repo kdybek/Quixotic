@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Quixotic",
   "version": "1.0",
-  "description": "Jisho to Anki flashcard generator.",
+  "description": "Jisho.org to Anki flashcard generator. For more information, check out the README.md here: https://github.com/kdybek/Quixotic.",
   "permissions": ["*://jisho.org/*"],
   "background": {
     "service_worker": "background.js"

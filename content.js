@@ -1,5 +1,15 @@
-const elements = document.querySelectorAll('div.concept_light-representation');
+function enterJMDict() {
 
+}
+
+//---------------------------------------------------------
+//-------------------------Main----------------------------
+//---------------------------------------------------------
+
+// Find all results on page
+const elements = document.querySelectorAll('div.concept_light clearfix');
+
+// Add flashcard buttons
 for (let element of elements) {
     const button = document.createElement("button");
     button.textContent = "Make a flashcard";
@@ -14,7 +24,7 @@ for (let element of elements) {
         });
         console.log(furigana);
 
-        chrome.runtime.sendMessage({ action: 'makeAFlashcard', args: { kanji, furigana } });
+        chrome.runtime.sendMessage({ action: 'addNote', args: { kanji, furigana } });
     });
 
     element.appendChild(button);
